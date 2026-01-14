@@ -1,9 +1,7 @@
-const apiUrl = "https://test-product-registration.onrender.com/produtos";
-const form = document.getElementById("formProduto");
-const lista = document.getElementById("listaProdutos");
+const apiUrl = "https://test-product-registration.onrender.com";
 
 function carregarProdutos() {
-  fetch(apiUrl)
+  fetch(`${apiUrl}/produtos`)
     .then((res) => res.json())
     .then((produtos) => {
       lista.innerHTML = "";
@@ -13,7 +11,7 @@ function carregarProdutos() {
         lista.appendChild(li);
       });
     })
-    .catch(err => console.error("Erro ao carregar:", err));
+    .catch((err) => console.error("Erro ao carregar:", err));
 }
 
 form.addEventListener("submit", (e) => {
@@ -22,7 +20,7 @@ form.addEventListener("submit", (e) => {
   const name = document.getElementById("name").value;
   const preco = document.getElementById("preco").value;
 
-  fetch(apiUrl, {
+  fetch(`${apiUrl}/produtos`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -34,7 +32,7 @@ form.addEventListener("submit", (e) => {
       form.reset();
       carregarProdutos();
     })
-    .catch(err => console.error("Erro ao salvar:", err));
+    .catch((err) => console.error("Erro ao salvar:", err));
 });
 
 carregarProdutos();

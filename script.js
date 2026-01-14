@@ -1,10 +1,13 @@
-const apiUrl = "https://test-product-registration.onrender.com";
+const apiUrl = "https://test-product-registration.onrender.com/produtos"; // Corrigido: adiciona /produtos
+const lista = document.getElementById("listaProdutos"); // Referência do <ul>
+const form = document.getElementById("formProduto"); // Referência do <form>
 
+// Função para carregar produtos do servidor
 function carregarProdutos() {
-  fetch(apiUrl) // sem o /produtos extra
+  fetch(apiUrl)
     .then((res) => res.json())
     .then((produtos) => {
-      lista.innerHTML = "";
+      lista.innerHTML = ""; // Limpa a lista antes de adicionar os produtos
       produtos.forEach((p) => {
         const li = document.createElement("li");
         li.textContent = `${p.name} - R$ ${p.preco}`;
@@ -14,6 +17,7 @@ function carregarProdutos() {
     .catch((err) => console.error("Erro ao carregar:", err));
 }
 
+// Evento de envio do formulário
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -21,7 +25,6 @@ form.addEventListener("submit", (e) => {
   const preco = document.getElementById("preco").value;
 
   fetch(apiUrl, {
-    // sem o /produtos extra
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -30,10 +33,11 @@ form.addEventListener("submit", (e) => {
   })
     .then((res) => res.json())
     .then(() => {
-      form.reset();
-      carregarProdutos();
+      form.reset(); // Limpa o formulário
+      carregarProdutos(); // Recarrega a lista de produtos
     })
     .catch((err) => console.error("Erro ao salvar:", err));
 });
 
+// Carrega os produtos assim que a página abre
 carregarProdutos();

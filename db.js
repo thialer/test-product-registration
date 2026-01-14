@@ -1,16 +1,16 @@
 const { Pool } = require("pg");
 
 const pool = new Pool({
-  host: "ep-blue-darkness-ahhlaku9-pooler.c-3.us-east-1.aws.neon.tech",
-  user: "neondb_owner",
-  password: "npg_5ToIH7qifEMs",
-  database: "neondb",
-  port: 5432,
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+  port: process.env.DB_PORT,
   ssl: {
-    rejectUnauthorized: false
-  }
+    rejectUnauthorized: false,
+  },
 });
 
 module.exports = {
-  query: (text, params) => pool.query(text, params)
+  query: (text, params) => pool.query(text, params),
 };

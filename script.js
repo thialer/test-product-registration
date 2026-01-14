@@ -1,4 +1,4 @@
-const apiUrl = "https://test-product-registration.onrender.com/api/produtos";
+const apiUrl = "https://test-product-registration.onrender.com";
 
 function carregarProdutos() {
   fetch(apiUrl) // sem o /produtos extra

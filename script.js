@@ -1,4 +1,4 @@
-const apiUrl = "http://localhost:3000/produtos";
+const apiUrl = "https://test-product-registration.onrender.com/produtos";
 const form = document.getElementById("formProduto");
 const lista = document.getElementById("listaProdutos");
 
@@ -12,7 +12,8 @@ function carregarProdutos() {
         li.textContent = `${p.name} - R$ ${p.preco}`;
         lista.appendChild(li);
       });
-    });
+    })
+    .catch(err => console.error("Erro ao carregar:", err));
 }
 
 form.addEventListener("submit", (e) => {
@@ -32,7 +33,8 @@ form.addEventListener("submit", (e) => {
     .then(() => {
       form.reset();
       carregarProdutos();
-    });
+    })
+    .catch(err => console.error("Erro ao salvar:", err));
 });
 
 carregarProdutos();

@@ -1,7 +1,7 @@
 const apiUrl = "https://test-product-registration.onrender.com/api/produtos";
 
 function carregarProdutos() {
-  fetch(`${apiUrl}/produtos`)
+  fetch(apiUrl) // sem o /produtos extra
     .then((res) => res.json())
     .then((produtos) => {
       lista.innerHTML = "";
@@ -20,7 +20,8 @@ form.addEventListener("submit", (e) => {
   const name = document.getElementById("name").value;
   const preco = document.getElementById("preco").value;
 
-  fetch(`${apiUrl}/produtos`, {
+  fetch(apiUrl, {
+    // sem o /produtos extra
     method: "POST",
     headers: {
       "Content-Type": "application/json",
